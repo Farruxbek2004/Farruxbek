@@ -7,7 +7,7 @@ def write_exceptions(exception, e):
         file.write(f'{dct}\n')
 
 
-def get_x():
+def get_datatime():
     try:
         file = open("lesson1.txt", "r")
     except Exception as e:
@@ -21,4 +21,4 @@ def get_x():
     return ""
 
 
-print(get_x())
+print(get_datatime())
