@@ -1,1 +1,1 @@
-{<class 'Exception'>: FileNotFoundError(2, 'No such file or directory'), 'data time': '2023-01-14 15:41:46'}
+{<class 'Exception'>: FileNotFoundError(2, 'No such file or directory'), 'data time': '2023-01-16 16:16:24'}

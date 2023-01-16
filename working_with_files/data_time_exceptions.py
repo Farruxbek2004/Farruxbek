@@ -1,11 +1,9 @@
 from time import strftime
 
-time_ = strftime("%Y-%m-%d %H:%M:%S")
-
 
 def write_exceptions(exception, e):
     with open('exceptions.txt', 'a') as file:
-        dct = {exception: e, 'data time': time_}
+        dct = {exception: e, 'data time': strftime("%Y-%m-%d %H:%M:%S")}
         file.write(f'{dct}\n')
 
 
