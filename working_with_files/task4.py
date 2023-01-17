@@ -12,10 +12,3 @@ def count_the():
 
 
 print(count_the())
-import csv
-
-
-class Country:
-    def __init__(self, file_):
-        self.file = file_
-
