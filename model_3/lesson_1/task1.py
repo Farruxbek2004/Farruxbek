@@ -1,5 +1,5 @@
 import csv
-from ..exceptions import exceptins_func
+
 
 
 class EmployeeDepartment:
