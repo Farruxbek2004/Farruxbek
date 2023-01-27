@@ -6,10 +6,9 @@
 
 def sum_error(func):
     def list_error(lst):
-        try:
-            if type(lst) == list:
-                return sum([i for i in range(len(lst))])
-        except FileNotFoundError as e:
+        if type(lst) == list:
+            return sum([i for i in range(len(lst))])
+        else:
             print('Please send only list.')
 
     return list_error
