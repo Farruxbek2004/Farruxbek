@@ -1,11 +1,12 @@
 # only_even_parameters nomli dekorator yarating, bunda quyidagi funksiyallarda
 # ishlating va tegishli natija qaytaring.
 def only_even_parameters(func):
-    def divide_inner(a, b):
-        if a != 1:
-            return func(a, b)
-        else:
-            return 'Please add only even numbers!'
+    def divide_inner(*args):
+        for i in args:
+            if i % 2 == 0:
+                return func(*args)
+            else:
+                return 'Please add only even numbers!'
 
     return divide_inner
 
@@ -18,7 +19,6 @@ def add(a, b):
 print(add(6, 8))  # 14
 print(add(4, 4))  # 8
 print(add(1, 4))  # Please add only even numbers!
-
 
 # @only_even_parameters
 # def multiply(a, b, c, d):
