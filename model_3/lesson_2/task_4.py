@@ -9,21 +9,16 @@ def only_even_parameters(func):
                 return 'Please add only even numbers!'
 
     return divide_inner
-
-
 @only_even_parameters
 def add(a, b):
     return a + b
 
 
 print(add(6, 8))  # 14
-print(add(4, 4))  # 8
 print(add(1, 4))  # Please add only even numbers!
+@only_even_parameters
+def multiply(a, b, c, d):
+    return a * b * c * d
 
-# @only_even_parameters
-# def multiply(a, b, c, d):
-#     return a * b * c * d
-
-
-# print(multiply(6, 4, 2, 2))  # 96
-# print(multiply(1, 4, 2, 2))  # Please multiple only even numbers!
+print(multiply(2,3,4,2))
+print(multiply(3,3,4,2))
