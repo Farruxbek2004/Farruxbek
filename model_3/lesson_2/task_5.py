@@ -7,7 +7,7 @@
 def sum_error(func):
     def list_error(lst):
         if type(lst) == list:
-            return sum([i for i in range(len(lst))])
+            return func(lst)
         else:
             print('Please send only list.')
 
@@ -16,8 +16,8 @@ def sum_error(func):
 
 @sum_error
 def sum_index(lst):
-    return lst
+    return sum([i for i in range(len(lst))])
 
 
-lst = [2, 4, 5, 6]
+lst = [2, 4, 5, 5, 6]
 print(sum_index(lst))
