@@ -2,12 +2,17 @@
 # funksiya qiymati 2 ga ko'payirilgan holda qaytarilsin.
 # add(2, 3)  # 10
 # add(5, 5)  # 20
-def add_func(num, num_2):
-    def func():
-        return (num + num_2) * 2
+def add_func(func):
+    def add_result_func(number, number_2):
+        return (number + number_2) * 2
 
-    return func
+    return add_result_func
 
 
-result = add_func(5, 5)
-print(result())
+@add_func
+def value(number, number_2):
+    return number + number_2
+
+
+result = value(4, 3)
+print(result)
