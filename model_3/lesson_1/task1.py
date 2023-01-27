@@ -1,7 +1,6 @@
 import csv
 
 
-
 class EmployeeDepartment:
     def __init__(self, employee_file, department_file):
         self.employee_file = employee_file
