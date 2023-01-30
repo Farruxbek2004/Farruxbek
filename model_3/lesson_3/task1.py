@@ -26,7 +26,7 @@ def iterator_func():
     result = []
     for i in range(1, 21):
         if i % 2 == 0:
-            result.append(f"-{i}")
+            result.append(i * (-1))
         else:
             result.append(i)
     return result

@@ -13,8 +13,8 @@ def get_name_txt():
         result = file.readlines()
         file.close()
         for i in result:
-            if i[0] == "n":
-                yield i
+            if "name" in i:
+                yield i.split("=")[1][:-1]
 
 
 planets_gen = get_name_txt()

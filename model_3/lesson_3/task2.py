@@ -7,7 +7,7 @@ def get_a_piece():
     except Exception as e:
         print(e)
     else:
-        res = new_file.readline()
+        res = new_file.readlines()
         new_file.close()
 
         for i in res:
