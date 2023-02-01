@@ -31,7 +31,7 @@ def add():
 
 def write():
     try:
-        with open("hotelt_info.csv", "a", newline="\n") as f:
+        with open("hotel_get_info.csv", "a", newline="\n") as f:
             file = csv.writer(f)
             file.writerow(["Fullname", "Age", "Address", "Length of stay", "Summa", "Country"])
             file.writerow(
