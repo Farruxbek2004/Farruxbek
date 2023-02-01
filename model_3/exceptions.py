@@ -1,4 +1,10 @@
-def exceptins_func(exceptions, e):
-    with open('exceptions.txt', 'w', encoding='utf-8') as file:
-        exception = f'name : {exceptions} , meaning : {e}'
-        file.write(f"{exception}\n")
+from datetime import datetime
+
+
+def exceptins_func(exceptions):
+    with open('exceptions.txt', 'a', encoding='utf-8') as file:
+        file.write(f"{exceptions}  {value}\n")
+
+
+format_ = "%H:%M:%S %m/%d/%Y"
+value = datetime.now().strftime(format_)
