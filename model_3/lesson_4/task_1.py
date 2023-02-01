@@ -41,7 +41,7 @@ def year_calculator():
         text.set(your_age)
     except:
         showerror(("Erorr"),
-                  "\nEror fayl")
+                  "\nError fayl")
 
 
 text = tkinter.StringVar()
