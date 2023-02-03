@@ -1,5 +1,4 @@
 import tkinter
-from datetime import *
 from tkinter import *
 from tkinter.messagebox import showerror
 
@@ -25,8 +24,8 @@ label_year = Label(age, text="Year: ", bg='green', font=25)
 label_year.place(x=70, y=120)
 year_entry = Entry(age, width=5)
 year_entry.place(x=150, y=120)
-calculator_age0 = Label(age, text="Calculate age ->", foreground="green", font=25)
-calculator_age0.place(x=20, y=170)
+calculator_age = Label(age, text="Calculate age ->", foreground="green", font=25)
+calculator_age.place(x=20, y=170)
 
 label_name = Label(age, text="Your age: ", bg='green', font=50)
 label_name.place(x=50, y=250)
@@ -40,7 +39,7 @@ def year_calculator():
         your_age = str(your_age)
         text.set(your_age)
     except:
-        showerror(("Erorr"),
+        showerror(("Error"),
                   "\nError fayl")
 
 

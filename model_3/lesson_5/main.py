@@ -16,7 +16,7 @@ file_path = "tasks.csv"
 
 
 def get_prev_task_id():
-    with open(file_path) as f:
+    with open(file_path, "r") as f:
         csv_reader = csv.DictReader(f)
         return int([row for row in csv_reader][-1].get("id"))
 
@@ -57,8 +57,6 @@ task_entry.grid(row=0, column=1)
 
 add_btn = tk.Button(text=ADD_BTN, command=add)
 add_btn.grid(row=0, column=2)
-
-# with open(file_path)
 
 if __name__ == "__main__":
     window.mainloop()
