@@ -42,7 +42,7 @@ def translate_func():
         translation = translator.translate(translate_entry.get())
         text.set(translation)
     except:
-        showinfo(("Erorr"), "\nError")
+        showinfo(("Error"), "\nError")
 
 
 translate_label = tk.Label(window, padx=20, pady=10, text="Write here", fg="green")

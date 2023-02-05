@@ -1,9 +1,6 @@
 from tkinter import *
-from datetime import *
-from translate import Translator
 from transliterate import *
 from model_3.exceptions import exceptins_func
-import csv
 
 
 def translate():
@@ -22,7 +19,7 @@ def clouse():
 
 target = Tk()
 target.title('Translate ')
-target['background'] = 'black'
+target['background'] = 'yellow'
 
 main = Frame(target)
 main.grid(column=0, row=0, sticky=(N, W, E, S))
