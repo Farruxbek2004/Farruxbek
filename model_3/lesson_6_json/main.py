@@ -5,7 +5,7 @@ KEY = "gKOeS2ZI3wK4zTeGcKeZ8dgBp9psidFl1ntV2cAR"
 url = f"https://api.freecurrencyapi.com/v1/latest?apikey={KEY}"
 resp = requests.get(url)
 
-with ollpen("weather.json", "w") as f:
+with open("weather.json", "w") as f:
     json.dump(json.loads(resp.text), f)
 
 urll = f"https://kun.uz/news/list"
