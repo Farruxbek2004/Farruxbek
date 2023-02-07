@@ -2,6 +2,12 @@ import csv
 import tkinter as tk
 from tkinter import ttk
 from model_3.exceptions import exceptins_func
+import requests
+
+
+KEY = 'gKOeS2ZI3wK4zTeGcKeZ8dgBp9psidFl1ntV2cAR'
+url = f"https://api.freecurrencyapi.com/v1/latest?apikey={KEY}"
+resp = requests.get(url)
 
 window = tk.Tk()
 window.title("Currency Converter")
