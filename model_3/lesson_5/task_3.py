@@ -1,6 +1,5 @@
 from tkinter import *
 from transliterate import *
-from model_3.exceptions import exceptins_func
 
 
 def translate():

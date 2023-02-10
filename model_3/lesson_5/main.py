@@ -18,7 +18,7 @@ file_path = "tasks.csv"
 def get_prev_task_id():
     with open(file_path, "r") as f:
         csv_reader = csv.DictReader(f)
-        return int([row for row in csv_reader][-1].get("id"))
+        return [row for row in csv_reader]
 
 
 def get_tasks():
