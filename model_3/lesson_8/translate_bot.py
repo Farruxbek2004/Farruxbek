@@ -12,7 +12,7 @@ def welcome_message(message):
     bot.send_message(chat_id, "👋 Assalomu alaykum ......\n"
                               "Botdan foydalanmoqchi bo'lganinggiz uchun raxmat!\n"
                               "Bironta xatolik yuz bersa https://t.me/Yunusboyev_Farruxbek")
-    print(message)
+
 
 
 @bot.message_handler(commands=["enuz"])
