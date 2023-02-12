@@ -144,7 +144,7 @@ def set_result(call):
 
 value = {
     'no': {
-        "res": f"{bot.send_message('/register')}"
+        "res": "/register"
     },
     "yes": {
         "res": "Sizning ma'lumotlaringgiz csv file ga saqlandi"
