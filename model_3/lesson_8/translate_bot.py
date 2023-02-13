@@ -18,24 +18,32 @@ def welcome_message(message):
 @bot.message_handler(commands=["enuz"])
 def translate_english_uzbek(message):
     chat_id = message.chat.id
-    msg = bot.reply_to(chat_id,
+    msg = bot.send_message(chat_id,
                        "English - O'zbek holatiga o'tildi. 'O'zbek - Rus holatiga o'tish uchun /uzru buyrug'ini bering.")
-    bot.register_next_step_handler(msg, process_name_steep)
+    bot.register_next_step_handler(msg, tarjima_en_uz)
+
+def tarjima_en_uz(message):
+    trans = Translator(from_lang='en', to_lang='Uzb')
+    translation = trans.translate(message.text)
+    bot.reply_to(message, translation)
 
 
-def process_name_steep(message):
-    translater = Translator(to_lang="en")
-    translation = translater.translate("salom")
-    msg = bot.reply_to(message, translation)
 
 
 @bot.message_handler(commands=["uzru"])
 def translate_uzbek_rus(message):
     chat_id = message.chat.id
-    bot.send_message(chat_id,
+    msg = bot.send_message(chat_id,
                      "'O'zbek - Rus' holatiga o'tildi. 'English - O'zbek' holatiga o'tish uchun /enuz buyrug'ini bering.")
 
+    bot.register_next_step_handler(msg, translate_uz_ru)
 
+
+@bot.message_handler(func=lambda message: True)
+def translate_uz_ru(message):
+    trans = Translator(from_lang='Uzb', to_lang='ru')
+    translation = trans.translate(message.text)
+    bot.reply_to(message, translation)
 def my_command():
     return [
         BotCommand("/start", "Start bot"),
