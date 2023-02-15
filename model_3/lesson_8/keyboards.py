@@ -35,15 +35,16 @@ def get_language_btn(value):
 
 share_phone_btn = ReplyKeyboardMarkup(resize_keyboard=True)
 share_phone_btn.add(KeyboardButton("Share phone", request_contact=True))
-RESULT = {
-    "❌" : "no",
-    "✅" : "yes"
-}
 
-def get_result_btn():
+
+def get_csv_file_path(action):
+    save = {
+        "❌": "no",
+        "✅": "yes"
+    }
     result_inline_btn = InlineKeyboardMarkup()
     result_inline_btn.add(
-        InlineKeyboardButton(list(RESULT.keys())[0], callback_data=f"result_{list(RESULT.keys())[0]}"),
-        InlineKeyboardButton(list(RESULT.keys())[1], callback_data=f"result_{list(RESULT.keys())[1]}"),
+        InlineKeyboardButton(list(save.keys())[0], callback_data=f"{action}_{list(save.values())[0]}"),
+        InlineKeyboardButton(list(save.keys())[1], callback_data=f"{action}_{list(save.values())[1]}"),
     )
-
+    return result_inline_btn

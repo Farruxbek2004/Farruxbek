@@ -1,14 +1,14 @@
 import telebot
-import os
 import csv
 from telebot import custom_filters
 from telebot.storage import StateMemoryStorage
 from telebot.types import BotCommand, ReplyKeyboardRemove
-from model_3.lesson_8.keyboards import share_phone_btn, get_language_btn, get_result_btn
+from model_3.lesson_8.keyboards import share_phone_btn, get_language_btn, get_csv_file_path
 from model_3.lesson_8.todo.messages import messages
 from model_3.lesson_8.todo.states import StudentRegistrationForm
 from model_3.lesson_8.todo.task import Chat
 from model_3.lesson_8.utils import write_row_to_csv, get_fullname
+from model_3.lesson_8.todo.Save import Save
 
 BOT_TOKEN = "6093522078:AAF1M1C1a-cCMHWnOPnan5B4B0NEmQ6PCnI"
 
@@ -23,7 +23,7 @@ def welcome_message(message):
     chat_id = message.chat.id
     user = message.from_user
     fullname = get_fullname(user.first_name, user.last_name)
-    bot.send_message(chat_id, f"Assalomu alaykum, {fullname}", reply_markup=get_language_btn("register"))
+    bot.send_message(chat_id, f"Assalomu alaykum, {fullname} ro'yxatdan o'tish uchun /register buyrug'ini yuboring")
 
 
 @bot.callback_query_handler(lambda call: call.data.startswith("_language_"))
@@ -96,14 +96,13 @@ def language_get(call):
         print(lang_code)
 
 
-@bot.callback_query_handler(lambda call: call.data.startswith("confirm_course_"), state=StudentRegistrationForm.course)
-def get_task_handler(call):
-    message = call.message
-    confirm_answer = call.data.split("_")[2]
+@bot.message_handler(content_types=['text'])
+def get_task_handler(message):
     with bot.retrieve_data(message.from_user.id, message.chat.id) as data:
         data['course'] = message.text
-        msg = "Quyidagi ma'lumotlar qa'bul qilindi:\n"
-        msg += f"Fullname: {data.get('first_name')} {data.get('last_name')}\n"
+        msg = f"Quyidagi ma'lumotlar qa'bul qilindi:\n"
+        msg += f"First name: {data.get('first_name')}\n"
+        msg += f"Last name: {data.get('last_name')}\n"
         msg += f"Phone: {data.get('phone')}\n"
         msg += f"Age: {data.get('age')}\n"
         msg += f"Language: {data.get('language')}\n"
@@ -111,25 +110,38 @@ def get_task_handler(call):
         msg += "ushbu malumotlar saqlansinmi ?\n"
         msg += "ha -> ✅\n"
         msg += "yo'q -> ❌"
-        bot.send_message(message.chat.id, msg, parse_mode="html", reply_markup=get_result_btn())
-        if confirm_answer == "yes":
-            with open("registratsion.csv", "a", encoding="utf-8") as f:
-                header = ["Fullname", "Phone", "Age", "Language", "Course"]
-                csv_write = csv.DictWriter(f, header)
-            if os.path.getsize("registratsion.csv") == 0:
-                csv_write.writeheader()
-            csv_write.writerow(message.from_user)
-            bot.send_message(message.chat.id, "Malumotlar csv file ga qo'shild")
-        elif confirm_answer == "no":
-            bot.send_message(message.chat.id, "Malumotlar saqlanmadi qaytadan /register buyrug'ini yuboring")
-        bot.send_message(message.chat.id, msg, "Ushbu ma'lumotlar saqlansinmi")
-        bot.delete_state(message.from_user.id, message.chat.id)
+        bot.send_message(message.chat.id, msg, reply_markup=get_csv_file_path('save'))
+
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith("save"))
+def callback(call):
+    message = call.message
+    text = call.data.split("_")[1]
+    if text == "yes":
+        with bot.retrieve_data(call.from_user.id, message.chat.id) as data:
+            save_info = Save(
+                data.get('first_name'),
+                data.get('last_name'),
+                data.get("phone"),
+                data.get("age"),
+                data.get("language"),
+                data.get("course")
+            )
+
+        write_row_to_csv(
+            "registration.csv",
+            save_info.get_save_func().keys(),
+            save_info.get_save_func()
+        )
+
+    elif text == "no":
+        bot.send_message(message.chat.id, "Ma'lumotlar saqlanmadi qaytadan /register")
+    bot.delete_state(message.from_user.id, message.chat.id)
 
 
 def my_commands():
     return [
         BotCommand("/start", "Start bot"),
-        # BotCommand("/add", "Add new task"),
         BotCommand("/register", "Register student")
     ]
 
